@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ex05_Review {
-	static Scanner scan = new Scanner(System.in);
-	static String log = null;
+	private static Scanner scan;
+	private String log;
+	private static int index;
 	//static public Ex05_Review instance = new Ex05_Review();
 	static List<Member> list = new ArrayList<Member>();
 	public static void main(String[] args) {
@@ -27,27 +28,30 @@ public class Ex05_Review {
 		//	  - 다른 사람의 글은 상세보기만 가능하다
 		//    - 로그인 한 사람 프로그램 종료전 로그아웃을 해야 합니다.
 		
-		list.add(new Member("aaa","1234","윤성혁"));
-		list.add(new Member("bbb","2345","정지오"));
-		list.add(new Member("ccc","3456","김재세"));
-		Ex05_Review2.instance.init();
+		Ex05_Review2.getInstance().init();
 		new  Ex05_Review();
 	}
 	Ex05_Review (){
+		list.add(new Member("aaa","1234","홍길동"));
+		list.add(new Member("bbb","2345","최길동"));
+		list.add(new Member("ccc","3456","이길동"));
+		scan = new Scanner(System.in);
+		log = null;
+		index = -1;
 		mainMenu(log);
 	}
 	public static void mainMenu(String log){
 		while(true) {
-			System.out.println(log);
+			//System.out.println(log);
 			System.out.println("1. 회원가입 2. 로그인 3. 글 목록보기 4.종료");
 			System.out.println(">>");
 			int select = scan.nextInt();
 			if(select == 1) {
 				join();
 			}else if(select == 2) {
-				login(log);
+				login(log,index);
 			}else if(select == 3) {
-				Ex05_Review2.instance.boardList();
+				Ex05_Review2.getInstance().boardList();
 			}else if(select == 4){
 				System.out.println("프로그램 종료.");
 				break;
@@ -56,7 +60,7 @@ public class Ex05_Review {
 			}
 		}
 	}
-	private static void login(String log) {
+	private static void login(String log,int index) {
 		if(log != null) {
 			System.out.println("이미 로그인 되었습니다.");
 			
@@ -70,13 +74,14 @@ public class Ex05_Review {
 				if(list.get(i).getId().equals(id)&&
 					list.get(i).getPw().equals(pw)) {
 					log = list.get(i).getId();
+					index = i;
 					check = true;
 					break;
 				}
 			}
 			if(check == true) {
 				System.out.println("로그인 성공");
-				Ex05_Review2.instance.loginMenu(log);
+				Ex05_Review2.getInstance().loginMenu(log,index);
 				
 			}else {
 				System.out.println("로그인 실패");
