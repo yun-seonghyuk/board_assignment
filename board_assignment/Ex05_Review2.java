@@ -7,9 +7,16 @@ import java.util.Scanner;
 public class Ex05_Review2 {
 	private Scanner scan ;
 	private static Ex05_Review2 instance = new Ex05_Review2();
+	private Ex05_Review2() {
+		
+	}
 	public static Ex05_Review2 getInstance() {
+		if(instance == null) {
+			instance = new Ex05_Review2();
+		}
 		return instance;
 	}
+	
 	private  List<Board> board;
 	public void init() {
 		scan = new Scanner(System.in);
