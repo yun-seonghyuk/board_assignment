@@ -113,7 +113,7 @@ public class Ex05_Review2 {
 		System.out.println("글 작성");
 		System.out.println("제목를 입력하세요 >>");
 		String title = scan.next();
-		String writer = Ex05_Review.list.get(index).getName();
+		String writer = "\t "+Ex05_Review.list.get(index).getName();
 		System.out.println("글내용를 입력하세요 >>");
 		String content = scan.next();
 		board.add(new Board(title,writer,content));
